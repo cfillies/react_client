@@ -5,7 +5,7 @@ import { asideFiltersConfigurations, setAsideItemConfiguration, setSearchState, 
 import { AsideFiltersInterface, InnerAsideMenuInterface } from '../../../../utils/interfaces'
 import { changeState, updateChangeType } from '../../../../features/filter/filterObjectSlice'
 import { reset } from '../../../../features/filter/counterSlice'
-import {fetchFilters, fetchItemsWithPostMethodAsync} from '../../../../features/filter/documentsSlice'
+import { fetchItemsWithPostMethodAsync} from '../../../../features/filter/documentsSlice'
 
 // const primary = "btn btn-bg-light border border-gray-200 btn-color-primary"
 // const muted = "btn btn-bg-light btn-color-gray-900"

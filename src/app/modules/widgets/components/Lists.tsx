@@ -4,10 +4,9 @@ import {
 } from '../../../../_metronic/partials/widgets'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchDocumentsAsync, fetchItemFieldAsync, fetchDocumentsWithPostMethodAsync } from '../../../../features/filter/documentsSlice'
-import { currentSearchState, newFilter, changeState, currentState, currentChangeType, searchConfigurations, asideFiltersConfigurations } from '../../../../features/filter/filterObjectSlice'
+import { fetchDocumentsWithPostMethodAsync } from '../../../../features/filter/documentsSlice'
+import { currentSearchState, changeState, currentState, currentChangeType, searchConfigurations, asideFiltersConfigurations } from '../../../../features/filter/filterObjectSlice'
 import { setTotalPagesNumber } from '../../../../features/filter/totalPagesSlice'
-import { FilterInterface } from '../../../../utils/interfaces'
 import {currentPageSize} from '../../../../features/filter/counterSlice'
 import { totalPages } from '../../../../features/filter/totalPagesSlice'
 
@@ -51,7 +50,6 @@ const Lists: FC = () => {
   const dispatch = useDispatch()
   const currentSearchingStatus = useSelector(currentSearchState)
   const currentChangeStatus = useSelector(currentState)
-  const updatedFilter: FilterInterface = useSelector(newFilter);
   const changeType = useSelector(currentChangeType)
   const searchConf = useSelector(searchConfigurations)
   const asideItemConf = useSelector(asideFiltersConfigurations)

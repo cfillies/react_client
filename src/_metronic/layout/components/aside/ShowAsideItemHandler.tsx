@@ -22,7 +22,7 @@ const ShowAsideItemHandler: React.FC<Props> = ({document, fieldName, idx}) => {
   const currentFieldName = fieldName as keyof typeof asideItemConf
   
   const filterIndex = asideItemConf[currentFieldName].indexOf(document.value, 0);
-  const filterFlag = filterIndex != -1
+  const filterFlag = filterIndex !== -1
 
   // const muted = 'btn btn-sm btn-white btn-color-muted px-4 py-2'
   const muted = "btn btn-bg-light btn-color-gray-900"

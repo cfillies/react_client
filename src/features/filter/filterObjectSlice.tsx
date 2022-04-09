@@ -128,16 +128,7 @@ export const slice = createSlice({
     },
     setSearchConfiguration: (state, action: PayloadAction<{updateSearchConfig:SearchInterface}>) => {
       state.searchConfig.search = action.payload.updateSearchConfig.search
-      if (action.payload.updateSearchConfig.field === 'Überall' || action.payload.updateSearchConfig.field === 'Fulltext') {
-        state.searchConfig.field = 'all'
-      }
-      if (action.payload.updateSearchConfig.field === 'Hida Text' || action.payload.updateSearchConfig.field === 'ObjNr') {
-        state.searchConfig.field = 'hidas'
-      }
-      if (action.payload.updateSearchConfig.field === 'Addresse') {
-        state.searchConfig.field = 'adresse'
-      }
-      // state.searchConfig = {...action.payload.updateSearchConfig}
+      state.searchConfig.field = action.payload.updateSearchConfig.field
     },
     setAsideItemConfiguration: (state, action: PayloadAction<{updateAsideItemConfig:AsideFiltersInterface}>) => {
       state.asideFiltersConfiguration = {...action.payload.updateAsideItemConfig}

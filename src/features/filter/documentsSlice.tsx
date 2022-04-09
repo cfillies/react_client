@@ -165,15 +165,12 @@ export const fetchItemsWithPostMethodAsync = createAsyncThunk(
     const page_size = store.getState().counter.pageSize
     const search = filtersObject.searchQuery.search.length > 0? filtersObject.searchQuery.search: "";
     let match = {} as AsideMatchFiltersInterface
-    let request = "page=" + (store.getState().counter.value - 1).toString() + "&";
-    request += "page_size=" + store.getState().counter.pageSize.toString() + "&";
-
+    
     let key: keyof AsideFiltersInterface;
     for (key in filtersObject.filterQuery){
       if (filtersObject.filterQuery[key].length > 0) {
         let filterArray = []
         for (let idx = 0; idx < filtersObject.filterQuery[key].length; idx++) {
-          request+=filtersObject.filterQuery[key][idx];
           filterArray.push(filtersObject.filterQuery[key][idx])
         }
         match[key] = {"$in": filterArray}
@@ -214,7 +211,6 @@ export const fetchDocumentsWithPostMethodAsync = createAsyncThunk(
     const page_size = store.getState().counter.pageSize
     const search = filtersObject.searchQuery.search.length > 0? filtersObject.searchQuery.search: "";
     let match = {} as AsideMatchFiltersInterface
-    
     let key: keyof AsideFiltersInterface;
     for (key in filtersObject.filterQuery){
       if (filtersObject.filterQuery[key].length > 0) {
@@ -235,7 +231,7 @@ export const fetchDocumentsWithPostMethodAsync = createAsyncThunk(
       "multivaluefacets": ["hidas", "Sachbegriff", "Denkmalart", "Denkmalname"]
     }
     let uri = `${process.env.REACT_APP_API_URL}/search/metadata?`
-          
+
     const response = await fetch(uri, {
       method: "post",
       headers: {

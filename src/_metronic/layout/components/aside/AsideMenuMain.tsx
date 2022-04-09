@@ -1,21 +1,12 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, { useState } from 'react'
-import AsideCheckBox from './AsideCheckBox'
 import AsideCheckBox2 from './AsideCheckBox2'
 import { AsideFiltersCounterInterface, AsideMenuInterface } from '../../../../utils/interfaces'
 import { useDispatch, useSelector } from 'react-redux'
 import { asideFiltersConfigurations, changeLoadingFiltersState, currentChangeType, currentFilterCounter, currentLoadingFiltersState, searchConfigurations } from '../../../../features/filter/filterObjectSlice'
 import { InnerAsideMenuInterface } from '../../../../utils/interfaces'
-import { fetchFilters, fetchItemsWithPostMethodAsync } from '../../../../features/filter/documentsSlice'
+import { fetchItemsWithPostMethodAsync } from '../../../../features/filter/documentsSlice'
 import {ShowAsideItemHandler} from './ShowAsideItemHandler'
-import { AsideMenuItemWithSub } from './AsideMenuItemWithSub'
-
-
-type Props = {
-  fieldName: string,
-  document: InnerAsideMenuInterface,
-  idx: number
-}
 
 type PropsDocs = {
   listFieldName: string,
@@ -136,7 +127,7 @@ export function AsideMenuMain() {
   // }
     
   const ShowAsideElementsHandler: React.FC<PropsDocs> = ({asideDocuments, listFieldName}) => { 
-    const key = listFieldName as keyof typeof asideItemConf
+    // const key = listFieldName as keyof typeof asideItemConf
       return (
         <>
           {/* <ul>

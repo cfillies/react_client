@@ -3,8 +3,8 @@ import clsx from 'clsx'
 import {useLayout} from '../../core'
 import {KTSVG} from '../../../helpers'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { increment, decrement, selectCount, reset, } from '../../../../features/filter/counterSlice'
+import { useDispatch } from 'react-redux'
+import { reset, } from '../../../../features/filter/counterSlice'
 import { changeState, updateChangeType, setSearchConfiguration, setSearchState, changeLoadingHorizontalFiltersState, changeLoadingFiltersState } from '../../../../features/filter/filterObjectSlice'
 
 
@@ -55,11 +55,13 @@ const Toolbar2: FC = () => {
             <div className='d-flex align-items-center py-1'>
               <div className='me-4' id="selection_menu_2"> 
                 <select className="form-select" aria-label="Select example" ref={selectionInputRef}>
-                  <option>Überall</option>
-                  <option value="1">Fulltext</option>
-                  <option value="2">Addresse</option>
-                  <option value="3">ObjNr</option>
-                  <option value="3">Hida Text</option>
+                  {/* <option>Überall</option> */}
+                  <option value="text">Text</option>
+                  <option value="adresse">Addresse</option>
+                  <option value="path">Pfad</option>
+                  <option value="hidas">Hida</option>
+                  <option value="vorhaben">Vorhaben</option>
+                  <option value="Denkmalname">Denkmalname</option>
                 </select>
               </div>
             </div>
