@@ -14,7 +14,8 @@ type Props = {
     hidas: string,
     Denkmalart: string,
     doc_image: string,
-    vorhaben: string
+    vorhaben: string,
+    summary: string
   }
 }
 
@@ -34,6 +35,14 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
       setButtonMerken(true)
       setButtonColor(lightDanger)
     }
+  }
+
+  function text2speech(txt: string) {
+    var msg = new SpeechSynthesisUtterance();
+    msg.volume = 1; // From 0 to 1
+    msg.text = txt;
+    msg.lang = 'de';
+    speechSynthesis.speak(msg);
   }
 
   return (
@@ -264,7 +273,10 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
             <div className="card-body pt-3">
               <div className="row-xl-2">
                 <div className="d-flex flex-row-fluid flex-wrap align-items-center">
-                  <a href="#" className="btn btn-bg-light btn-active-icon-dark btn-active-light-primary">
+                  <a href="#" 
+                     className="btn btn-bg-light btn-active-icon-dark btn-active-light-primary"
+                     onClick={() => text2speech(doc_props.summary)}
+                  >
                     Zusammenfassung: 
                     <span className="svg-icon svg-icon-1" style={{marginLeft:"10px"}}> 
                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="volume-up" className="svg-inline--fa fa-volume-up fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -278,7 +290,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
               <div className="row-xl-8">
                 <div className="d-flex flex-row-fluid flex-wrap align-items-center">
                   <p className="text-gray-800 fw-normal mb-5">
-                    Teller pa wandte am dieses wu durren. Sind ihn sage zum mirs was den. Augen se ernst am steil in litze immer zu sitzt. Wovon mir gluck zwirn vor nah bibel ruhig ers wuste. Stadtchen ertastete gestrigen eia wei. Gelernt gewohnt mir hof schritt erstieg ein. Litze las mir abend dabei alles hosen. Wasser zu seiest en sa fellen solche ruhten se. Du es wachter zu spuckte glatten 
+                    {doc_props.summary}
                   </p>
                 </div>
               </div>

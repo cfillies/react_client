@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../setup/redux/Store'
 
 // Define a type for the slice state
@@ -30,10 +30,14 @@ export const slice = createSlice({
     reset: state => {
       state.value = 1;
     },
+    setPageSize: (state, action: PayloadAction<{newPageSize:number}>) => {
+      state.pageSize = action.payload.newPageSize;
+    },
+
   },
 });
 
-export const { increment, decrement, reset } = slice.actions;
+export const { increment, decrement, reset, setPageSize } = slice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This

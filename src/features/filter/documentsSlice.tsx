@@ -154,6 +154,7 @@ export const fetchFilters = createAsyncThunk(
       req += request
     }
     const response = await fetch(req);
+
     return await (response.json()) as JSON
   }
 )
@@ -161,11 +162,11 @@ export const fetchFilters = createAsyncThunk(
 export const fetchItemsWithPostMethodAsync = createAsyncThunk(
   'documents/fetchItemsWithPostMethodAsync', 
   async (filtersObject:{filterQuery: AsideFiltersInterface, searchQuery: SearchInterface}) => {
-    const page = store.getState().counter.value - 1;
-    const page_size = store.getState().counter.pageSize
+    const regex = filtersObject.searchQuery.search.length > 0? filtersObject.searchQuery.field: "";
+    const district = store.getState().updateFilter.district
     const search = filtersObject.searchQuery.search.length > 0? filtersObject.searchQuery.search: "";
     let match = {} as AsideMatchFiltersInterface
-    
+
     let key: keyof AsideFiltersInterface;
     for (key in filtersObject.filterQuery){
       if (filtersObject.filterQuery[key].length > 0) {
@@ -177,10 +178,10 @@ export const fetchItemsWithPostMethodAsync = createAsyncThunk(
       }
     }
     const data = {
-      "page": page,
-      "page_size": page_size,
+      "metadata": district,
       "search": search,
       "match": match,
+      "regex": regex,
       "categories": ["Außenanlagen", "Baumaßnahme", "Bepflanzungen", "Brandschutz","Dach", "Diverse", "Eingangsbereich", "Farbe", "Fassade", "Gebäude", "Gebäudenutzung", "Haustechnik", "Maßnahme", "Nutzungsänderung", "Werbeanlage"],
       "singlevaluefacets": ["path", "doctype", "ext", "district", "vorhaben"],
       "multivaluefacets": ["hidas", "Sachbegriff", "Denkmalart", "Denkmalname"]
@@ -198,8 +199,6 @@ export const fetchItemsWithPostMethodAsync = createAsyncThunk(
         data
       )
     });
-    // console.log(data)
-    // console.log(response.json())
     return await (response.json()) as JSON
   }
 )
@@ -209,7 +208,9 @@ export const fetchDocumentsWithPostMethodAsync = createAsyncThunk(
   async (filtersObject:{filterQuery: AsideFiltersInterface, searchQuery: SearchInterface}) => {
     const page = store.getState().counter.value - 1;
     const page_size = store.getState().counter.pageSize
+    const district = store.getState().updateFilter.district
     const search = filtersObject.searchQuery.search.length > 0? filtersObject.searchQuery.search: "";
+    const regex = filtersObject.searchQuery.search.length > 0? filtersObject.searchQuery.field: "";
     let match = {} as AsideMatchFiltersInterface
     let key: keyof AsideFiltersInterface;
     for (key in filtersObject.filterQuery){
@@ -224,12 +225,15 @@ export const fetchDocumentsWithPostMethodAsync = createAsyncThunk(
     const data = {
       "page": page,
       "page_size": page_size,
+      "metadata": district,
       "search": search,
       "match": match,
+      "regex": regex,
       "categories": ["Außenanlagen", "Baumaßnahme", "Bepflanzungen", "Brandschutz","Dach", "Diverse", "Eingangsbereich", "Farbe", "Fassade", "Gebäude", "Gebäudenutzung", "Haustechnik", "Maßnahme", "Nutzungsänderung", "Werbeanlage"],
       "singlevaluefacets": ["path", "doctype", "ext", "district", "vorhaben"],
       "multivaluefacets": ["hidas", "Sachbegriff", "Denkmalart", "Denkmalname"]
     }
+    
     let uri = `${process.env.REACT_APP_API_URL}/search/metadata?`
 
     const response = await fetch(uri, {

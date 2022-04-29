@@ -13,7 +13,8 @@ type Props = {
     hidas: string,
     Denkmalart: string,
     doc_image: string,
-    vorhaben: string
+    vorhaben: string,
+    summary: string
   }[],
 }
 

@@ -14,8 +14,9 @@ interface filterConfigurationInterface {
     searchConfig: SearchInterface,
     asideItemConfig: AsideMenuItemFetchInterface,
     searchState: boolean,
-    docTypList: Array<InnerAsideMenuInterface>
-    filterCounter: AsideFiltersCounterInterface
+    docTypList: Array<InnerAsideMenuInterface>,
+    filterCounter: AsideFiltersCounterInterface,
+    district: String
   }
 
 // Define the initial state using that type
@@ -109,7 +110,8 @@ const initialState: filterConfigurationInterface = {
       "hidas": 0,
       "path": 0,
       "vorhaben": 0,
-    }
+    },
+    district: "charlottenburg"
   }
 
 
@@ -142,6 +144,9 @@ export const slice = createSlice({
     updateFilterCounter: (state, action: PayloadAction<{filterCounter:AsideFiltersCounterInterface}>) => {
       state.filterCounter = {...action.payload.filterCounter}
     },
+    setDistrict: (state, action: PayloadAction<{newDistrict:String}>) => {
+      state.district = action.payload.newDistrict
+    },
   },
 });
 
@@ -155,6 +160,7 @@ export const { setAsideItemConfiguration } = slice.actions;
 export const { setSearchState } = slice.actions;
 export const { setDocTypList } = slice.actions;
 export const { updateFilterCounter } = slice.actions;
+export const { setDistrict } = slice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -181,5 +187,6 @@ export const currentSearchState = (state: RootState) => state.updateFilter.searc
 export const docTypFilterList = (state: RootState) => state.updateFilter.docTypList;
 export const currentDocTypFilters = (state: RootState) => state.updateFilter.loadingHorizontalFiltersState;
 export const currentFilterCounter = (state: RootState) => state.updateFilter.filterCounter;
+export const currentDistrict = (state: RootState) => state.updateFilter.district;
 
 export default slice.reducer;

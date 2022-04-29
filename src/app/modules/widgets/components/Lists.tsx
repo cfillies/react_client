@@ -19,7 +19,8 @@ interface DocumentsInterface {
   hidas: string,
   Denkmalart: string,
   doc_image: string,
-  vorhaben: string
+  vorhaben: string,
+  summary: string
 }
 
 // const DUMMY_DATA = [
@@ -81,7 +82,13 @@ const Lists: FC = () => {
             id: key,
             ...objResult.payload.metadata[key]
           };
-    
+          let newSummary = ""
+          for (const summaryKey in doc["summary"]) {
+            // console.log(doc["summary"][summaryKey])
+            newSummary += doc["summary"][summaryKey] + " ";
+          }
+          doc["summary"] = null;
+          doc["summary"] = newSummary
           doc_list.push(doc);
         }
         setLoadedDocuments(doc_list);
@@ -110,10 +117,17 @@ const Lists: FC = () => {
             id: key,
             ...objResult.payload.metadata[key]
           };
-    
+          let newSummary = ""
+          for (const summaryKey in doc["summary"]) {
+            // console.log(doc["summary"][summaryKey])
+            newSummary += doc["summary"][summaryKey] + " ";
+          }
+          doc["summary"] = null;
+          doc["summary"] = newSummary
           doc_list.push(doc);
         }
         setLoadedDocuments(doc_list);
+        console.log(loadedDocuments)
       } 
       catch (err) {
         console.error('Failed to fetch documents: ', err)

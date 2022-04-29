@@ -1,6 +1,6 @@
-import {FC} from 'react'
+import {FC, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { increment, decrement, selectCount, reset, } from '../../../../features/filter/counterSlice'
+import { increment, decrement, selectCount, reset, setPageSize, } from '../../../../features/filter/counterSlice'
 import { changeState, updateChangeType, setAsideItemConfiguration, asideFiltersConfigurations, changeLoadingFiltersState, setSearchState, changeLoadingHorizontalFiltersState } from '../../../../features/filter/filterObjectSlice'
 import { AsideFiltersInterface } from '../../../../utils/interfaces'
 import { totalPages } from '../../../../features/filter/totalPagesSlice'
@@ -14,6 +14,19 @@ const Toolbar3: FC = () => {
   let asideItemList = [] as String[]
   let key: keyof AsideFiltersInterface;
   const dispatch = useDispatch()
+
+  const selectionInputRef = useRef<HTMLSelectElement>(null);
+
+  function submitHandler() {
+    
+    if (null !== selectionInputRef.current) {
+      const selectionPageSize = parseInt(selectionInputRef.current.value);
+      dispatch(reset())
+      dispatch(changeState())
+      dispatch(setPageSize({newPageSize:selectionPageSize}))
+    }
+  }
+
   for(key in asideItemConf) {
     let currentDoc = asideItemConf[key]
     asideItemList = asideItemList.concat(currentDoc)
@@ -92,6 +105,17 @@ const Toolbar3: FC = () => {
           <div className="d-flex card flex-center align-items-center position-relative me-4"> 
             <span><h4>{currentTotalPages}</h4></span>
           </div> 
+
+          <div className='me-4' id="selection_menu_4"> 
+            <select className="form-select" aria-label="Select example" ref={selectionInputRef} onClick={submitHandler}>
+              {/* <option>Überall</option> */}
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+            </select>
+          </div>
 
           <div className='d-flex flex-column-fluid align-items-center position-relative me-4' id="back_button"> 
             <a href="#" className="btn btn-active-icon-dark btn-active-text-dark"
