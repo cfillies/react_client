@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+import { currentDistrict } from '../../../../features/filter/filterObjectSlice'
+import { useSelector } from 'react-redux'
 
-const SHAREPOINT: string = (process.env.REACT_APP_SHAREPOINT_URL as string)
 
 type Props = {
   doc_props: {
@@ -10,16 +11,45 @@ type Props = {
     file: string,
     path: string,
     doctype: string,
-    adresse: string,
-    hidas: string,
-    Denkmalart: string,
+    adresse: string[],
+    hidas: string[],
+    Denkmalart: string[],
     doc_image: string,
     vorhaben: string,
     summary: string
   }
 }
 
+type DocSummary = {
+  text: string,
+  
+}
+
 const ListItem: React.FC<Props> = ({doc_props}) => {
+  const selectedDistrict = useSelector(currentDistrict)
+  let districtName = ""
+
+  switch (selectedDistrict) {
+    case "charlottenburg": 
+      districtName = "CharlottenburgWilmersdorf";
+      break;
+    case "koepenick": 
+    case "metadata":
+      districtName = "Treptow";
+      break;
+    case "lichtenberg": 
+      districtName = "Lichtenberg"
+      break;
+    case "mitte": 
+      districtName = "Mitte";
+      break;
+    case 
+      "pankow": districtName = "Pankow";
+      break;
+  }
+
+  const SHAREPOINT: string = (process.env.REACT_APP_SHAREPOINT_URL as string) + districtName + "/"
+
   const muted = 'btn btn-sm btn-light btn-color-muted px-4 py-2'
   const lightDanger = 'btn btn-sm btn-light btn-light-danger px-4 py-2'
 
@@ -43,6 +73,57 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
     msg.text = txt;
     msg.lang = 'de';
     speechSynthesis.speak(msg);
+  }
+
+  const docAddresse = doc_props.adresse !== undefined && doc_props.adresse !== null && doc_props.adresse.length > 0? doc_props.adresse.join("; ") : ""
+  const docDenkmalart = doc_props.Denkmalart !== undefined && doc_props.Denkmalart !== null && doc_props.Denkmalart.length > 0? doc_props.Denkmalart.join("; ") : ""
+  const docHidas = doc_props.hidas !== undefined && doc_props.hidas !== null && doc_props.hidas.length > 0? doc_props.hidas.join("; ") : ""
+
+  const summaryLimit = 300;
+  const ShowText: React.FC<DocSummary> = ({text}) => { 
+    if (text.length > summaryLimit) {
+      return (
+        <>
+          <span>
+            {text.substring(0, summaryLimit)}
+            <button type="button"
+              className="btn btn-bg-white btn-text-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#kt_modal_1"
+            >
+              ...
+            </button>
+            <div className="modal fade" tabIndex={-1} id="kt_modal_1">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Voller Text</h5>
+                    <div
+                      className="btn btn-icon btn-sm btn-active-light-primary ms-2"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <KTSVG
+                        path="/media/icons/duotune/arrows/arr061.svg"
+                        className="svg-icon svg-icon-2x"
+                      />
+                    </div>
+                  </div>
+                  <div className="modal-body">
+                    <p>{text}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </span>
+        </>
+      )
+    }
+    return (
+      <p>
+        {text}
+      </p>
+    )
   }
 
   return (
@@ -89,7 +170,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
             <div className="d-flex flex-column-auto h-50px">
                 <h5 className="card-title align-items-start flex-column" style={{paddingTop:"20px", marginLeft:"20px"}}>
                   <a href={
-                    `${SHAREPOINT}Treptow/${doc_props.path.split("\\")[doc_props.path.split("\\").length - 1]}/${doc_props.file}`
+                    `${SHAREPOINT}${doc_props.path.split("\\")[doc_props.path.split("\\").length - 1]}/${doc_props.file}`
                     //          SHAREPOINT?.concat("Treptow/")
                     //         .concat(doc_props.path.split("\\")[doc_props.path.split("\\").length - 1])
                     //         .concat("/")
@@ -231,7 +312,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
                           <span className='text-muted fw-bold d-block pt-1'>Adresse</span>
                         </div>
                         <div className="col-xl-6">
-                          <span className='text-muted fw-bold d-block pt-1'>{doc_props.adresse}</span>
+                          <span className='text-muted fw-bold d-block pt-1'>{docAddresse}</span>
                         </div>
                       </div>
                       <div className="row g-5 g-xl-8">
@@ -239,7 +320,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
                           <span className='text-muted fw-bold d-block pt-1'>Objectnr</span>
                         </div>
                         <div className="col-xl-6">
-                          <span className='text-muted fw-bold d-block pt-1'>{doc_props.hidas}</span>
+                          <span className='text-muted fw-bold d-block pt-1'>{docHidas}</span>
                         </div>
                       </div>
                       <div className="row g-5 g-xl-8">
@@ -247,7 +328,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
                           <span className='text-muted fw-bold d-block pt-1'>Denkmalart</span>
                         </div>
                         <div className="col-xl-6">
-                          <span className='text-muted fw-bold d-block pt-1'>{doc_props.Denkmalart}</span>
+                          <span className='text-muted fw-bold d-block pt-1'>{docDenkmalart}</span>
                         </div>
                       </div>
                       <div className="row g-5 g-xl-8">
@@ -273,7 +354,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
             <div className="card-body pt-3">
               <div className="row-xl-2">
                 <div className="d-flex flex-row-fluid flex-wrap align-items-center">
-                  <a href="#" 
+                  <a 
                      className="btn btn-bg-light btn-active-icon-dark btn-active-light-primary"
                      onClick={() => text2speech(doc_props.summary)}
                   >
@@ -289,9 +370,8 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
               </div>
               <div className="row-xl-8">
                 <div className="d-flex flex-row-fluid flex-wrap align-items-center">
-                  <p className="text-gray-800 fw-normal mb-5">
-                    {doc_props.summary}
-                  </p>
+                  <ShowText text = {doc_props.summary}></ShowText>
+
                 </div>
               </div>
               <div className="row-xl-2">
