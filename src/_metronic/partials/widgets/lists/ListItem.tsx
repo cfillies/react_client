@@ -371,21 +371,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
               <div className="row-xl-8">
                 <div className="d-flex flex-row-fluid flex-wrap align-items-center">
                   <ShowText text = {doc_props.summary}></ShowText>
-                  {/* <p className="text-gray-800 fw-normal mb-5">
-                    {
-                      doc_props.summary.substring(0, summaryLimit)
-                    }
-                    
-                  </p>
-                  {
-                      doc_props.summary.length > summaryLimit &&                       
-                      <a
-                        className="btn btn-bg-light btn-active-icon-dark btn-active-light-primary"
-                        onClick={() => showFullText(doc_props.summary)}
-                      >
-                        ...
-                      </a>
-                    } */}
+
                 </div>
               </div>
               <div className="row-xl-2">
