@@ -180,7 +180,7 @@ export function AsideMenuMain() {
   return (
     <>
       {/* <AsideCheckBox/> */}
-      <AsideCheckBox2/>
+      {/* <AsideCheckBox2/> */}
 
       {loadedDocuments.hidas?.length > 0 && 
       <>
