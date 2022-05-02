@@ -84,7 +84,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
     if (text.length > summaryLimit) {
       return (
         <>
-          <p>
+          <span>
             {text.substring(0, summaryLimit)}
             <button type="button"
               className="btn btn-bg-white btn-text-primary"
@@ -115,7 +115,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
                 </div>
               </div>
             </div>
-          </p>
+          </span>
         </>
       )
     }
