@@ -15,9 +15,9 @@ interface DocumentsInterface {
   file: string,
   path: string,
   doctype: string,
-  adresse: string,
-  hidas: string,
-  Denkmalart: string,
+  adresse: string[],
+  hidas: string[],
+  Denkmalart: string[],
   doc_image: string,
   vorhaben: string,
   summary: string

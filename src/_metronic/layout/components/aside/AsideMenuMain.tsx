@@ -48,10 +48,6 @@ export function AsideMenuMain() {
   const updateFiltersHandler = async () => {
 
     if (changeType === 'searching' || changeType === 'asideItem' || changeType === 'filtering' || changeType === 'horizontalItem') {
-      if (changeType === 'searching') {
-        console.log('searching')
-      }
-      
       try {
         const t = await dispatch(fetchItemsWithPostMethodAsync({filterQuery: asideItemConf, searchQuery: searchConf}));
 
