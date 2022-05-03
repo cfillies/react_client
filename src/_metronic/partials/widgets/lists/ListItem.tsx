@@ -176,7 +176,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
                     //         .concat("/")
                     //         .concat(doc_props.file)
                           } 
-                            target="_blank" className="pe-3">
+                            target="_blank" className="pe-3" rel="noreferrer">
                     {doc_props.file}
                     
                   </a>

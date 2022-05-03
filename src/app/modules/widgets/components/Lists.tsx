@@ -9,6 +9,8 @@ import { currentSearchState, changeState, currentState, currentChangeType, searc
 import { setTotalPagesNumber } from '../../../../features/filter/totalPagesSlice'
 import {currentPageSize} from '../../../../features/filter/counterSlice'
 import { totalPages } from '../../../../features/filter/totalPagesSlice'
+import {fetchStatus} from '../../../../features/filter/documentsSlice'
+import { BlockUI } from '../../../../utils/BlockUI'
 
 interface DocumentsInterface {
   id: number,
@@ -23,28 +25,6 @@ interface DocumentsInterface {
   summary: string
 }
 
-// const DUMMY_DATA = [
-//   {
-//     id: 1,
-//     file: 'file1',
-//     path: 'doc_order1',
-//     doctype: 'doc_type1',
-//     adresse: 'doc_address1',
-//     hidas: 'doc_obj_nr1',
-//     denkmalart: 'denkmalart1',
-//     doc_image: 'doc_image1',
-//   },
-//   {
-//     id: 2,
-//     file: 'file2',
-//     path: 'doc_order2',
-//     doctype: 'doc_type2',
-//     adresse: 'doc_address2',
-//     hidas: 'doc_obj_nr2',
-//     denkmalart: 'denkmalart2',
-//     doc_image: 'doc_image2',
-//   },
-// ];
 
 const Lists: FC = () => {
 
@@ -97,7 +77,6 @@ const Lists: FC = () => {
         console.error('Failed to load documents: ', err)
       } 
     }
-
    
     else if ((changeType === 'searching' || changeType === 'asideItem' || changeType === 'newPage' || changeType === 'horizontalItem' )) {
       
@@ -127,13 +106,11 @@ const Lists: FC = () => {
           doc_list.push(doc);
         }
         setLoadedDocuments(doc_list);
-        console.log(loadedDocuments)
       } 
       catch (err) {
         console.error('Failed to fetch documents: ', err)
       } 
     }
-    
   }
 
   
@@ -175,11 +152,12 @@ const Lists: FC = () => {
 
   
   if (currentChangeStatus){
-    // setLoadedDocuments([]);
     const newData = updateDocumentsListHandler();
     dispatch(changeState())
-    // console.log(newData)
   }
+
+  const currentDocLoadingStatus = useSelector(fetchStatus)
+  const loadingStatus = currentDocLoadingStatus === "loading" 
 
   return (
     <>
@@ -209,12 +187,10 @@ const Lists: FC = () => {
                       data-kt-scroll-height='auto'
                       data-kt-scroll-wrappers='#kt_aside_menu'
                       data-kt-scroll-offset='0'
-                      // docs={DUMMY_DATA}
                       docs={loadedDocuments}
           />
         }
-      {/* </div>
-    </div> */}
+        <BlockUI blocking={loadingStatus} title="Loading"/> 
     </>
   )
 }

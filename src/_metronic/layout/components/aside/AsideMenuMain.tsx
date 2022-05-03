@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AsideCheckBox2 from './AsideCheckBox2'
 import { AsideFiltersCounterInterface, AsideMenuInterface } from '../../../../utils/interfaces'
 import { useDispatch, useSelector } from 'react-redux'
-import { asideFiltersConfigurations, changeLoadingFiltersState, currentChangeType, currentFilterCounter, currentLoadingFiltersState, searchConfigurations } from '../../../../features/filter/filterObjectSlice'
+import { asideFiltersConfigurations, changeLoadingFiltersState, currentChangeType, currentFilterCounter, currentLoadingFiltersState, searchConfigurations, updateFilterCounter } from '../../../../features/filter/filterObjectSlice'
 import { InnerAsideMenuInterface } from '../../../../utils/interfaces'
 import { fetchItemsWithPostMethodAsync } from '../../../../features/filter/documentsSlice'
 import {ShowAsideItemHandler} from './ShowAsideItemHandler'
@@ -124,6 +124,8 @@ export function AsideMenuMain() {
     
   const ShowAsideElementsHandler: React.FC<PropsDocs> = ({asideDocuments, listFieldName}) => { 
     // const key = listFieldName as keyof typeof asideItemConf
+    const filtersCounter = useSelector(currentFilterCounter)
+    let newFiltersCounter = {...filtersCounter}
       return (
         <>
           {/* <ul>
@@ -145,6 +147,16 @@ export function AsideMenuMain() {
                       aria-expanded={filtersCounter[listFieldName as keyof AsideFiltersCounterInterface] > 0? "true" : "false"}
                       aria-controls={"kt_accordion_1_body_1" + listFieldName}
                       style={{paddingLeft:'50px'}}
+                      onClick={() => {
+                        
+                          const filterCounterKey = listFieldName as keyof AsideFiltersCounterInterface
+                          if (newFiltersCounter[filterCounterKey] > 0)
+                            {
+                            newFiltersCounter[filterCounterKey] = 0
+                            dispatch(updateFilterCounter({filterCounter: newFiltersCounter}))
+                          }
+                        }
+                      }
                     >
                       <span className="svg-icon svg-icon-1">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
