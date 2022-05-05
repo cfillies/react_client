@@ -5,7 +5,7 @@ export function MenuInner() {
       
       <ol className="breadcrumb breadcrumb-dot text-muted fs-6 fw-bold">
         <li className="breadcrumb-item pe-3">
-          <a href="#" className="pe-3">
+          <a href="https://blue-ocean-0a2eb4c03.1.azurestaticapps.net/" target="_blank" rel="noreferrer noopener" className="pe-3">
             Kartenansicht
           </a>
         </li>

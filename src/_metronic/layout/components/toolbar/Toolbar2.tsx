@@ -56,12 +56,12 @@ const Toolbar2: FC = () => {
               <div className='me-4' id="selection_menu_2"> 
                 <select className="form-select" aria-label="Select example" ref={selectionInputRef}>
                   {/* <option>Überall</option> */}
-                  <option value="text">Text</option>
-                  <option value="adresse">Addresse</option>
-                  <option value="path">Pfad</option>
-                  <option value="hidas">Hida</option>
-                  <option value="vorhaben">Vorhaben</option>
+                  <option value="adresse">Adresse</option>
                   <option value="Denkmalname">Denkmalname</option>
+                  <option value="text">Text</option>
+                  <option value="vorhaben">Vorhaben</option>
+                  <option value="hidas">Objektnummer</option>
+                  <option value="path">Pfad</option>
                 </select>
               </div>
             </div>

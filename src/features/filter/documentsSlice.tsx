@@ -182,7 +182,7 @@ export const fetchItemsWithPostMethodAsync = createAsyncThunk(
       "search": search,
       "match": match,
       "regex": regex,
-      "categories": ["Außenanlagen", "Baumaßnahme", "Bepflanzungen", "Brandschutz","Dach", "Diverse", "Eingangsbereich", "Farbe", "Fassade", "Gebäude", "Gebäudenutzung", "Haustechnik", "Maßnahme", "Nutzungsänderung", "Werbeanlage"],
+      "categories": ["Außenanlagen", "Baumaßnahme", "Bepflanzungen", "Brandschutz","Dach", "Diverse", "Eingangsbereich", "Farbe", "Fassade", "Fenster", "Gebäude", "Gebäudenutzung", "Haustechnik", "Maßnahme", "Nutzungsänderung", "Werbeanlage"],
       "singlevaluefacets": ["path", "doctype", "ext", "district", "vorhaben"],
       "multivaluefacets": ["hidas", "Sachbegriff", "Denkmalart", "Denkmalname"]
     }
@@ -229,7 +229,7 @@ export const fetchDocumentsWithPostMethodAsync = createAsyncThunk(
       "search": search,
       "match": match,
       "regex": regex,
-      "categories": ["Außenanlagen", "Baumaßnahme", "Bepflanzungen", "Brandschutz","Dach", "Diverse", "Eingangsbereich", "Farbe", "Fassade", "Gebäude", "Gebäudenutzung", "Haustechnik", "Maßnahme", "Nutzungsänderung", "Werbeanlage"],
+      "categories": ["Außenanlagen", "Baumaßnahme", "Bepflanzungen", "Brandschutz","Dach", "Diverse", "Eingangsbereich", "Farbe", "Fassade", "Fenster", "Gebäude", "Gebäudenutzung", "Haustechnik", "Maßnahme", "Nutzungsänderung", "Werbeanlage"],
       "singlevaluefacets": ["path", "doctype", "ext", "district", "vorhaben"],
       "multivaluefacets": ["hidas", "Sachbegriff", "Denkmalart", "Denkmalname"]
     }

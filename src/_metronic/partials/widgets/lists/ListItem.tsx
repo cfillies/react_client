@@ -301,7 +301,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
                       </div>
                       <div className="row g-5 g-xl-8">
                         <div className="col-xl-6">
-                          <span className='text-muted fw-bold d-block pt-1'>DocumentTyp</span>
+                          <span className='text-muted fw-bold d-block pt-1'>Dokumenttyp</span>
                         </div>
                         <div className="col-xl-6">
                           <span className='text-muted fw-bold d-block pt-1'>{doc_props.doctype}</span>
@@ -317,7 +317,7 @@ const ListItem: React.FC<Props> = ({doc_props}) => {
                       </div>
                       <div className="row g-5 g-xl-8">
                         <div className="col-xl-6">
-                          <span className='text-muted fw-bold d-block pt-1'>Objectnr</span>
+                          <span className='text-muted fw-bold d-block pt-1'>Objektnr</span>
                         </div>
                         <div className="col-xl-6">
                           <span className='text-muted fw-bold d-block pt-1'>{docHidas}</span>
