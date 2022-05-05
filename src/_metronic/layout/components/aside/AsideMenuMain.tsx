@@ -194,16 +194,6 @@ export function AsideMenuMain() {
       {/* <AsideCheckBox/> */}
       {/* <AsideCheckBox2/> */}
 
-      {loadedDocuments.hidas?.length > 0 && 
-      <>
-        {/* <div className='menu-item'>
-          <div className='menu-content pt-8 pb-2'>
-            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Hidas</span>
-          </div>
-        </div> */}
-        <ShowAsideElementsHandler asideDocuments={loadedDocuments.hidas} listFieldName='hidas'/>
-      </>
-      } 
 
       {loadedDocuments.Denkmalart?.length > 0 && 
       <>
@@ -226,7 +216,18 @@ export function AsideMenuMain() {
         <ShowAsideElementsHandler asideDocuments={loadedDocuments.Denkmalname} listFieldName='Denkmalname'/>
       </>
       } 
- 
+
+      {loadedDocuments.hidas?.length > 0 && 
+      <>
+        {/* <div className='menu-item'>
+          <div className='menu-content pt-8 pb-2'>
+            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Hidas</span>
+          </div>
+        </div> */}
+        <ShowAsideElementsHandler asideDocuments={loadedDocuments.hidas} listFieldName='hidas'/>
+      </>
+      }  
+
       {loadedDocuments.vorhaben?.length > 0 && 
       <>
         {/* <div className='menu-item'>
@@ -237,28 +238,6 @@ export function AsideMenuMain() {
         <ShowAsideElementsHandler asideDocuments={loadedDocuments.vorhaben} listFieldName='vorhaben'/>
       </>
       }
-      
-      {loadedDocuments.Sachbegriff?.length > 0 && 
-      <>
-        {/* <div className='menu-item'>
-          <div className='menu-content pt-8 pb-2'>
-            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Sachbegriff</span>
-          </div>
-        </div> */}
-        <ShowAsideElementsHandler asideDocuments={loadedDocuments.Sachbegriff} listFieldName='Sachbegriff'/>
-      </>
-      } 
-
-      {loadedDocuments.Maßnahme?.length > 0 && 
-      <>
-        {/* <div className='menu-item'>
-          <div className='menu-content pt-8 pb-2'>
-            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Maßnahme</span>
-          </div>
-        </div> */}
-        <ShowAsideElementsHandler asideDocuments={loadedDocuments.Maßnahme} listFieldName='Maßnahme'/>
-      </>
-      } 
 
       {loadedDocuments.path?.length > 0 && 
       <>
@@ -282,6 +261,28 @@ export function AsideMenuMain() {
       </>
       } 
       
+            
+      {loadedDocuments.Sachbegriff?.length > 0 && 
+      <>
+        {/* <div className='menu-item'>
+          <div className='menu-content pt-8 pb-2'>
+            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Sachbegriff</span>
+          </div>
+        </div> */}
+        <ShowAsideElementsHandler asideDocuments={loadedDocuments.Sachbegriff} listFieldName='Sachbegriff'/>
+      </>
+      } 
+
+      {loadedDocuments.Maßnahme?.length > 0 && 
+      <>
+        {/* <div className='menu-item'>
+          <div className='menu-content pt-8 pb-2'>
+            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Maßnahme</span>
+          </div>
+        </div> */}
+        <ShowAsideElementsHandler asideDocuments={loadedDocuments.Maßnahme} listFieldName='Maßnahme'/>
+      </>
+      }
 
       {loadedDocuments.Außenanlagen?.length > 0 && 
       <>
