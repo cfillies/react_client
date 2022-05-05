@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { string } from 'yup/lib/locale';
 import type { RootState } from '../../setup/redux/Store'
 import store from '../../setup/redux/Store';
-import { AsideFiltersInterface, AsideMatchFiltersInterface } from '../../utils/interfaces';
+import { AsideFiltersInterface, AsideMatchFiltersInterface, LoginInterface } from '../../utils/interfaces';
 
 interface FilterInterface {
   "Antrag": boolean,
@@ -26,6 +26,7 @@ interface documentsState {
   // Multiple possible status enum values
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   docTypStatus: 'idle' | 'loading' | 'succeeded' | 'failed',
+  loginStatus: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null
   
 }
@@ -34,6 +35,7 @@ const initialState: documentsState = {
     
     status: 'idle',
     docTypStatus: 'idle',
+    loginStatus: 'idle',
     error: null
   }
 
@@ -253,6 +255,20 @@ export const fetchDocumentsWithPostMethodAsync = createAsyncThunk(
   }
 )
 
+export const loginAsync = createAsyncThunk(
+  'documents/loginAsync', 
+  async (loginObject:LoginInterface) => {
+    
+    let request = "username=";
+    request += loginObject.user + "&password=" + loginObject.password;
+    let req = `${process.env.REACT_APP_API_URL}/login?`
+    req+=request
+    console.log(req)
+    const response = await fetch(req);
+    return await (response.json()) as JSON
+  }
+)
+
 export const slice = createSlice({
   name: 'allFetchedDocuments',
   initialState,
@@ -328,6 +344,16 @@ export const slice = createSlice({
       })
       .addCase(fetchDocumentsWithPostMethodAsync.rejected, (state, action) => {
         state.status = 'failed'
+        state.error = action.error.message as keyof typeof string
+      })
+      .addCase(loginAsync.pending, (state, action) => {
+        state.loginStatus = 'loading'
+      })
+      .addCase(loginAsync.fulfilled, (state, action) => {
+        state.loginStatus = 'succeeded'
+      })
+      .addCase(loginAsync.rejected, (state, action) => {
+        state.loginStatus = 'failed'
         state.error = action.error.message as keyof typeof string
       })
   }

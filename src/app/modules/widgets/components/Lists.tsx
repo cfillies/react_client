@@ -161,36 +161,31 @@ const Lists: FC = () => {
 
   return (
     <>
-    {/* <div className='row g-5 g-xl-8'> */}
-      
-      {/* <div className='col-xl-15'> */}
-      {/* <a href="#" className="btn btn-primary" onClick={onSavePostClicked} >Primary</a> */}
-        {
-            (currentTotalPages === 0 && 
-            <div className="card card-custom">
-              <div className="card-header">
-                  <h3 className="card-title text-warning">Information</h3>
-                  
-              </div>
-            <div className="card-body">
-              <h2>
-                Keine Dokumente zum Vorzeigen
-              </h2>
-            </div>
+      {
+        (currentTotalPages === 0 && 
+        <div className="card card-custom">
+          <div className="card-header">
+              <h3 className="card-title text-warning">Information</h3>
+          </div>
+        <div className="card-body">
+          <h2>
+            Keine Dokumente zum Vorzeigen
+          </h2>
+        </div>
 
-          </div>)
+      </div>)
 
-          ||
-          <ListsWidget7 className='card-xl-stretch mb-xl-8' 
-                      data-kt-scroll='true'
-                      data-kt-scroll-activate='{default: false, lg: true}'
-                      data-kt-scroll-height='auto'
-                      data-kt-scroll-wrappers='#kt_aside_menu'
-                      data-kt-scroll-offset='0'
-                      docs={loadedDocuments}
-          />
-        }
-        <BlockUI blocking={loadingStatus} title="Loading"/> 
+        ||
+        <ListsWidget7 className='card-xl-stretch mb-xl-8' 
+                    data-kt-scroll='true'
+                    data-kt-scroll-activate='{default: false, lg: true}'
+                    data-kt-scroll-height='auto'
+                    data-kt-scroll-wrappers='#kt_aside_menu'
+                    data-kt-scroll-offset='0'
+                    docs={loadedDocuments}
+        />
+      }
+      <BlockUI blocking={loadingStatus} title="Wird geladen"/> 
     </>
   )
 }
