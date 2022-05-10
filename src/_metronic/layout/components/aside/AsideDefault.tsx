@@ -6,12 +6,13 @@ import {useLayout} from '../../core'
 import {AsideMenu} from './AsideMenu'
 import {useDispatch, useSelector } from 'react-redux'
 import { currentDocumentsNumber } from '../../../../features/filter/totalPagesSlice'
-import { changeLoadingFiltersState, changeLoadingHorizontalFiltersState, changeState, setDistrict, setSearchState, updateChangeType } from '../../../../features/filter/filterObjectSlice'
+import { asideFiltersConfigurations, changeLoadingFiltersState, changeLoadingHorizontalFiltersState, changeState, setAsideItemConfiguration, setDistrict, setSearchState, updateChangeType } from '../../../../features/filter/filterObjectSlice'
 import { reset } from '../../../../features/filter/counterSlice'
 
 const AsideDefault: FC = () => {
   const {classes} = useLayout()
   const docsNumber = useSelector(currentDocumentsNumber)
+  const asideItemConf = useSelector(asideFiltersConfigurations)
   const selectionInputRef = useRef<HTMLSelectElement>(null);
 
   const dispatch = useDispatch();
@@ -29,6 +30,41 @@ const AsideDefault: FC = () => {
       dispatch(setSearchState({searchingState:false}))
       dispatch(changeLoadingHorizontalFiltersState())
       dispatch(changeLoadingFiltersState())
+
+      
+      let asideFilters = {
+        "Außenanlagen": [],
+        "Baumaßnahme": [],
+        "Bepflanzungen": [],
+        "Brandschutz": [],
+        "Dach": [],
+        "Denkmalart": [],
+        "Denkmalname": [],
+        "Diverse": [],
+        "Eingangsbereich": [],
+        "Farbe": [],
+        "Fassade": [],
+        "Fenster": [],
+        "Funk": [],
+        "Gebäude": [],
+        "Gebäudenutzung": [],
+        "Haustechnik": [],
+        "Kunst": [],
+        "Maßnahme": [],
+        "Nutzungsänderung": [],
+        "Sachbegriff": [],
+        "Solaranlage": [],
+        "Treppenhaus": [],
+        "Tür": [],
+        "Werbeanlage": [],
+        "district": [],
+        "doctype": [],
+        "ext": [],
+        "hidas": [],
+        "path": [],
+        "vorhaben": []
+      } as typeof asideItemConf;
+      dispatch(setAsideItemConfiguration({updateAsideItemConfig:asideFilters}))
     }
   }
 

@@ -170,3 +170,9 @@ export interface DocumentsInterface {
     "path": number,
     "vorhaben": number,
   }
+
+  export interface LoginInterface {
+    "user": string,
+    "password": string
+  }
+  
