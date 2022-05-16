@@ -17,7 +17,7 @@
   "AUTH.GENERAL.LEGAL": "Legal",
   "AUTH.GENERAL.CONTACT": "Kontakt",
   "AUTH.LOGIN.TITLE": "Create Account",
-  "AUTH.LOGIN.BUTTON": "Sign In",
+  "AUTH.LOGIN.BUTTON": "Anmeldung",
   "AUTH.FORGOT.TITLE": "Forgotten Password?",
   "AUTH.FORGOT.DESC": "Enter your email to reset your password",
   "AUTH.FORGOT.SUCCESS": "Your account has been successfully reset.",

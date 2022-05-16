@@ -74,7 +74,7 @@ export function Login() {
       >
         {/* begin::Heading */}
         <div className='text-center mb-10'>
-          <h1 className='text-dark mb-3'>Sign In to Kibardoc</h1>
+          <h1 className='text-dark mb-3'>KIbardok - Anmeldung</h1>
           {/* <div className='text-gray-400 fw-bold fs-4'>
             New Here?{' '}
             <Link to='/auth/registration' className='link-primary fw-bolder'>
